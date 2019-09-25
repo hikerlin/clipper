@@ -295,6 +295,28 @@ There is nothing inherent in Clipper that ties it to tmux. We can use it from an
 For example, we can add a mapping to our `~/.vimrc` to send the last-yanked text to Clipper by hitting `<leader>y`:
 
     nnoremap <leader>y :call system('nc localhost 8377', @0)<CR>
+    The <Leader> key is mapped to \ by default. So if you have a map of <Leader>t, you can execute it by default with \+t. For more detail or re-assigning it using the mapleader variable, see
+
+:help leader
+
+To define a mapping which uses the "mapleader" variable, the special string
+"<Leader>" can be used.  It is replaced with the string value of "mapleader".
+If "mapleader" is not set or empty, a backslash is used instead.  
+Example:
+    :map <Leader>A  oanother line <Esc>
+Works like:
+    :map \A  oanother line <Esc>
+But after:
+    :let mapleader = ","
+It works like:
+    :map ,A  oanother line <Esc>
+
+Note that the value of "mapleader" is used at the moment the mapping is
+defined.  Changing "mapleader" after that has no effect for already defined
+mappings.
+
+
+
 
 Equivalently, we could do the same for a Clipper daemon listening on a UNIX domain socket at `~/.clipper.sock` with:
 
